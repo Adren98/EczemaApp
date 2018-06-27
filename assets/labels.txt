@@ -1,0 +1,4 @@
+acute
+chronic
+no eczema
+subacute
