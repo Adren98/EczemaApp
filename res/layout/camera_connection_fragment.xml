@@ -63,4 +63,12 @@
         android:layout_toEndOf="@+id/button"
         android:text="Info" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_below="@+id/results"
+        android:layout_centerHorizontal="true"
+        android:text="sharing with tech team" />
+
 </RelativeLayout>

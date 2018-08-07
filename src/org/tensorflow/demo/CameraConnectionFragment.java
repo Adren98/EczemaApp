@@ -25,6 +25,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -38,11 +40,13 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.Image;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
@@ -53,7 +57,10 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -62,14 +69,12 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import org.tensorflow.demo.env.Logger;
-import org.tensorflow.demo.R;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+
 
 
 public class CameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
+
 
   /**
    * The camera preview size will be chosen to be the smallest frame by pixel size capable of
@@ -354,12 +359,30 @@ public class CameraConnectionFragment extends Fragment {
     }
   }
 
+    public void Resume() {
+        super.onResume();
+        edit();
+      if (null == cameraDevice) {
+
+        if (textureView.isAvailable()) {
+          openCamera(textureView.getWidth(), textureView.getHeight());
+        } else {
+          textureView.setSurfaceTextureListener(surfaceTextureListener);
+        }
+      }
+    }
+
   @Override
   public void onPause() {
     closeCamera();
     stopBackgroundThread();
     super.onPause();
   }
+
+    public void Pause() {
+        closeCamera();
+        super.onPause();
+    }
 
   /**
    * Sets up member variables related to camera.
@@ -485,40 +508,80 @@ public class CameraConnectionFragment extends Fragment {
     backgroundHandler = new Handler(backgroundThread.getLooper());
   }
 
-  private void edit() {
-      Button btn = (Button) getView().findViewById(R.id.button);
-      btn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              /*Log.i("MyApp", "this is a magic log message!");*/
-              ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-              onPause();
-          }
-      });
 
-      Button btn5 = (Button) getView().findViewById(R.id.button5);
-      btn5.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              /*Log.i("MyApp", "this is a magic log message!");*/
-              ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-              onResume();
-          }
-      });
-    Button btn6 = (Button) getView().findViewById(R.id.button6);
-    btn6.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        /*Log.i("MyApp", "this is a magic log message!");*/
-        ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-        openActivity2();
+  private void edit() {
+
+          Button btn = (Button) getView().findViewById(R.id.button);
+          btn.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  /*Log.i("MyApp", "this is a magic log message!");*/
+                  ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                  Pause();
+              }
+          });
+
+          Button btn5 = (Button) getView().findViewById(R.id.button5);
+          btn5.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  /*Log.i("MyApp", "this is a magic log message!");*/
+                  ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                  Resume();
+              }
+          });
+
+          Button btn6 = (Button) getView().findViewById(R.id.button6);
+          btn6.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  /*Log.i("MyApp", "this is a magic log message!");*/
+                  ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                  openActivity2();
+              }
+          });
+          Button btn3 = (Button) getView().findViewById(R.id.button3);
+          btn3.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  /*Log.i("MyApp", "this is a magic log message!");*/
+                  ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+                  Share();
+              }
+          });
       }
-    });
-  }
+
+
   public void openActivity2() {
     Intent intent = new Intent(CameraConnectionFragment.this.getActivity() , Activity2.class);
     startActivity(intent);
   }
+
+  public void Share() {
+    if (null != cameraDevice) {
+      Toast.makeText(getActivity().getApplicationContext(), "You can only share when the classifier is paused", Toast.LENGTH_LONG).show();
+    }
+    else{
+
+      ByteBuffer buffer = captureSession.getPlanes()[0].getBuffer();
+      byte[] bytes = new byte[buffer.capacity()];
+      buffer.get(bytes);
+      Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+
+      Bundle extras = new Bundle();
+      extras.putParcelable("Bitmap", bitmap);
+      Intent pass = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
+      pass.putExtras(extras);
+      startActivity(pass);
+
+
+
+    }
+  }
+
+
+
+
 
   /**
    * Stops the background thread and its {@link Handler}.
@@ -574,6 +637,8 @@ public class CameraConnectionFragment extends Fragment {
           ImageReader.newInstance(
               previewSize.getWidth(), previewSize.getHeight(), ImageFormat.YUV_420_888, 2);
 
+
+
       previewReader.setOnImageAvailableListener(imageListener, backgroundHandler);
       previewRequestBuilder.addTarget(previewReader.getSurface());
 
@@ -591,7 +656,9 @@ public class CameraConnectionFragment extends Fragment {
 
               // When the session is ready, we start displaying the preview.
               captureSession = cameraCaptureSession;
+
               try {
+
                 // Auto focus should be continuous for camera preview.
                 previewRequestBuilder.set(
                     CaptureRequest.CONTROL_AF_MODE,

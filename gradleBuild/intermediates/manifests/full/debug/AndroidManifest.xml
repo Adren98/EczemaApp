@@ -35,6 +35,7 @@
         android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="Eczema Detector"
+        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="org.tensorflow.demo.ClassifierActivity"
@@ -46,8 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.tensorflow.demo.Activity2" >
-        </activity>
+        <activity android:name="org.tensorflow.demo.Activity2" />
+        <activity android:name="org.tensorflow.demo.PopActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

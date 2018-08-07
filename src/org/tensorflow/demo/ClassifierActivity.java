@@ -16,8 +16,10 @@
 
 package org.tensorflow.demo;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -26,11 +28,16 @@ import android.media.Image;
 import android.media.Image.Plane;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
+import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Vector;
 import org.tensorflow.demo.OverlayView.DrawCallback;
@@ -118,6 +125,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
   private static final float TEXT_SIZE_DIP = 10;
 
+
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
     final float textSizePx =
@@ -179,6 +187,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
     try {
       image = reader.acquireLatestImage();
+
 
       if (image == null) {
         return;
@@ -244,7 +253,11 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         });
 
     Trace.endSection();
+
   }
+
+
+
 
   @Override
   public void onSetDebug(boolean debug) {

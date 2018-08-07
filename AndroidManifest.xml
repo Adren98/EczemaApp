@@ -16,7 +16,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.tensorflow.demo">
 
-
     <uses-sdk
         android:minSdkVersion="21"
         android:targetSdkVersion="25" />
@@ -36,7 +35,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="Eczema Detector"
         android:theme="@style/Theme.AppCompat.Light">
-
         <activity
             android:name=".ClassifierActivity"
             android:label="Eczema Detector"
@@ -47,8 +45,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity2">
-        </activity>
+        <activity android:name=".Activity2"></activity>
+        <activity android:name=".PopActivity"></activity>
     </application>
 
 </manifest>

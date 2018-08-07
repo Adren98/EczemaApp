@@ -47,8 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.tensorflow.demo.Activity2" >
-        </activity>
+        <activity android:name="org.tensorflow.demo.Activity2" />
+        <activity android:name="org.tensorflow.demo.PopActivity" />
 
         <meta-data
             android:name="android.support.VERSION"
