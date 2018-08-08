@@ -380,6 +380,7 @@ public class CameraConnectionFragment extends Fragment {
   }
 
     public void Pause() {
+
         closeCamera();
         super.onPause();
     }
@@ -563,17 +564,18 @@ public class CameraConnectionFragment extends Fragment {
     }
     else{
 
-      ByteBuffer buffer = captureSession.getPlanes()[0].getBuffer();
-      byte[] bytes = new byte[buffer.capacity()];
-      buffer.get(bytes);
-      Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-
-      Bundle extras = new Bundle();
-      extras.putParcelable("Bitmap", bitmap);
-      Intent pass = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
-      pass.putExtras(extras);
-      startActivity(pass);
-
+//      ByteBuffer buffer = capture.getPlanes()[0].getBuffer();
+//      byte[] bytes = new byte[buffer.capacity()];
+//      buffer.get(bytes);
+//      Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+//
+//      Bundle extras = new Bundle();
+//      extras.putParcelable("Bitmap", bitmap);
+//      Intent pass = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
+//      pass.putExtras(extras);
+//      startActivity(pass);
+      Intent pop = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
+      startActivity(pop);
 
 
     }

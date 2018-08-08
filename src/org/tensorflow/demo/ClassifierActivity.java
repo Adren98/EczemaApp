@@ -188,7 +188,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
     try {
       image = reader.acquireLatestImage();
 
-
       if (image == null) {
         return;
       }

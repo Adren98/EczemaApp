@@ -21,10 +21,10 @@ public class PopActivity extends Activity {
         setContentView(R.layout.activity_pop);
         backbutton();
 
-        imageView = (ImageView)findViewById(R.id.imageView);
-        Bundle extras = getIntent().getExtras();
-        Bitmap bitmap = extras.getParcelable("Bitmap");
-        imageView.setImageBitmap(bitmap);
+//        imageView = (ImageView)findViewById(R.id.imageView);
+//        Bundle extras = getIntent().getExtras();
+//        Bitmap bitmap = extras.getParcelable("Bitmap");
+//        imageView.setImageBitmap(bitmap);
     }
 
     private void backbutton() {

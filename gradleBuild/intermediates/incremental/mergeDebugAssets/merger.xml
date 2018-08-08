@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/deepstation/tfmobile/assets"><file name="graph.pb" path="/home/deepstation/tfmobile/assets/graph.pb"/><file name="labels.txt" path="/home/deepstation/tfmobile/assets/labels.txt"/></source><source path="/home/deepstation/tfmobile/gradleBuild/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/deepstation/tfmobile/build-types/debug/assets"/></dataSet></merger>
