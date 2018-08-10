@@ -16,6 +16,8 @@
 
 package org.tensorflow.demo;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -34,9 +36,15 @@ import android.os.Trace;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Vector;
@@ -83,7 +91,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private static final String MODEL_FILE = "file:///android_asset/graph.pb";
   private static final String LABEL_FILE = "file:///android_asset/labels.txt";
 
-  private static final boolean SAVE_PREVIEW_BITMAP = false;
+  private static final boolean SAVE_PREVIEW_BITMAP = true;
 
   private static final boolean MAINTAIN_ASPECT = true;
 
@@ -181,12 +189,59 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         });
   }
 
-  @Override
+  public void edit()
+  {
+
+    Button btn3 = (Button) findViewById(R.id.button3);
+    btn3.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        /*Log.i("MyApp", "this is a magic log message!");*/
+        ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
+        Share();
+      }
+    });
+  }
+
+  public void Share() {
+
+//    if (null != cameraDevice) {
+//      Toast.makeText(getApplicationContext(), "You can only share when the classifier is paused", Toast.LENGTH_LONG).show();
+//    }
+//    else{
+
+//      ByteBuffer buffer = capture.getPlanes()[0].getBuffer();
+//      byte[] bytes = new byte[buffer.capacity()];
+//      buffer.get(bytes);
+//      Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+//
+//      Bundle extras = new Bundle();
+//      extras.putParcelable("Bitmap", bitmap);
+//      Intent pass = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
+//      pass.putExtras(extras);
+//
+
+      ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+      cropCopyBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+      byte[] byteArray = bStream.toByteArray();
+
+      Intent anotherIntent = new Intent(this, PopActivity.class);
+      anotherIntent.putExtra("image", byteArray);
+      startActivity(anotherIntent);
+
+
+
+  }
+
+
+    @Override
   public void onImageAvailable(final ImageReader reader) {
     Image image = null;
 
     try {
       image = reader.acquireLatestImage();
+      edit();
+
 
       if (image == null) {
         return;
@@ -217,7 +272,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
           uvPixelStride,
           rgbBytes);
 
+
       image.close();
+
     } catch (final Exception e) {
       if (image != null) {
         image.close();
@@ -252,10 +309,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         });
 
     Trace.endSection();
-
   }
-
-
 
 
   @Override
@@ -276,6 +330,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
           canvas.getWidth() - copy.getWidth() * scaleFactor,
           canvas.getHeight() - copy.getHeight() * scaleFactor);
       canvas.drawBitmap(copy, matrix, new Paint());
+
 
       final Vector<String> lines = new Vector<String>();
       if (classifier != null) {

@@ -44,6 +44,7 @@ If you with to help the tech team by sharing your image, please press the 'I ACC
         android:layout_height="301dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="93dp"
         android:layout_weight="9" />
 
 </RelativeLayout>

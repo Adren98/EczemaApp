@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 public class PopActivity extends Activity {
 
     ImageView imageView;
+    Bitmap bmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,13 @@ public class PopActivity extends Activity {
 
 //        imageView = (ImageView)findViewById(R.id.imageView);
 //        Bundle extras = getIntent().getExtras();
-//        Bitmap bitmap = extras.getParcelable("Bitmap");
-//        imageView.setImageBitmap(bitmap);
+//        Bitmap bmp = extras.getParcelable("Bitmap");
+//        imageView.setImageBitmap(bmp);
+
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        imageView = (ImageView)findViewById(R.id.imageView);
+        imageView.setImageBitmap(bmp);
     }
 
     private void backbutton() {

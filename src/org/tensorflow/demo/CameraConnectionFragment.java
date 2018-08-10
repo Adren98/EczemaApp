@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -60,6 +61,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -249,6 +254,8 @@ public class CameraConnectionFragment extends Fragment {
     this.layout = layout;
     this.inputSize = inputSize;
   }
+
+  Bitmap bmp;
 
   /**
    * Shows a {@link Toast} on the UI thread.
@@ -541,44 +548,12 @@ public class CameraConnectionFragment extends Fragment {
                   openActivity2();
               }
           });
-          Button btn3 = (Button) getView().findViewById(R.id.button3);
-          btn3.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  /*Log.i("MyApp", "this is a magic log message!");*/
-                  ///Toast.makeText(getActivity().getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-                  Share();
-              }
-          });
       }
 
 
   public void openActivity2() {
     Intent intent = new Intent(CameraConnectionFragment.this.getActivity() , Activity2.class);
     startActivity(intent);
-  }
-
-  public void Share() {
-    if (null != cameraDevice) {
-      Toast.makeText(getActivity().getApplicationContext(), "You can only share when the classifier is paused", Toast.LENGTH_LONG).show();
-    }
-    else{
-
-//      ByteBuffer buffer = capture.getPlanes()[0].getBuffer();
-//      byte[] bytes = new byte[buffer.capacity()];
-//      buffer.get(bytes);
-//      Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-//
-//      Bundle extras = new Bundle();
-//      extras.putParcelable("Bitmap", bitmap);
-//      Intent pass = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
-//      pass.putExtras(extras);
-//      startActivity(pass);
-      Intent pop = new Intent(CameraConnectionFragment.this.getActivity() , PopActivity.class);
-      startActivity(pop);
-
-
-    }
   }
 
 
