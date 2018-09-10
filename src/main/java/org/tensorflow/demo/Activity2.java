@@ -42,39 +42,45 @@ public class Activity2 extends AppCompatActivity {
         listDataHeader.add("What should I do if I have eczema?");
 
         List<String> acute = new ArrayList<>();
-        acute.add("This eczema detector classifies 3 different types of eczema, Acute eczema, Subacute eczema and Chronic eczema");
+        acute.add("This eczema detector classifies 3 different types of eczema: ACUTE, SUBACUTE and CHRONIC eczema.");
 
         List<String> subacute = new ArrayList<>();
         subacute.add("\nACUTE\n\n" +
-                "\"Acute\" refers to an eczema rash that has just started. Some characteristics of the stage of acute eczema include:\n\n" +
-                "-Blisters\n" +
-                "-Extreme redness\n" +
-                "-Intense itching\n" +
-                "-Pain\n" +
-                "-Tenderness\n" +
-                "-Swelling\n" +
-                "-Heat\n");
+                "\"Acute\" refers to an eczema rash that has just started. Some characteristics in the stage of acute eczema include:\n\n" +
+                "- Blisters\n" +
+                "- Extreme redness\n" +
+                "- Intense itching\n" +
+                "- Pain\n" +
+                "- Tenderness\n" +
+                "- Swelling\n" +
+                "- Heat\n");
 
         subacute.add("\nSUBACUTE\n\n" +
                 "The subacute stage is the transitional phase between the acute and chronic stages. Eczema doesn't always spend the same amount of time in the subacute stage." +
                 " Each case of eczema transitions from stage to stage differently. The eczema rash evolves and takes on these new characteristics:\n\n" +
-                "-Flaky, scaly skin\n" +
-                "-Less redness\n" +
-                "-Cracks in the skin\n" +
-                "-Itching, burning, and/or stinging\n");
+                "- Flaky, scaly skin\n" +
+                "- Less redness\n" +
+                "- Cracks in the skin\n" +
+                "- Itching, burning, and/or stinging\n");
 
         subacute.add("\nCHRONIC\n\n" +
-                "Symptoms are at their most severe during the chronic stage, The chronic stage refers to eczema flares that last three or more months." +
+                "Symptoms are at their most severe during the chronic stage. The chronic stage refers to eczema flares that last three or more months." +
                 " Chronic eczema is quite different from the other two stages in the following ways:\n\n" +
-                "-Thickened, leathery-looking skin or lichenification\n" +
-                "-Accentuated skin lines\n" +
-                "-Cracks in the skin\n" +
-                "-Skin appears dark and dull\n" +
-                "-Larger areas of skin breakdown called excoriations\n" +
-                "-Itching\n");
+                "- Thickened, leathery-looking skin or lichenification\n" +
+                "- Accentuated skin lines\n" +
+                "- Cracks in the skin\n" +
+                "- Skin appears dark and dull\n" +
+                "- Larger areas of skin breakdown called excoriations\n" +
+                "- Itching\n");
 
         List<String> chronic = new ArrayList<>();
-        chronic.add("");
+        chronic.add("\nACUTE\n\n" +
+                "- Apply some eczema creams if the symptoms are mild\n" +
+                "- For information: https://www.webmd.com/skin-problems-and-treatments/eczema/treatment-16/treatments-for-you\n");
+        chronic.add("\nSUBACUTE\n\n" +
+                "- Consult a dermatologist for treatments");
+        chronic.add("\nCHRONIC\n\n" +
+                "- Visit a hospital immediately");
 
         listHash.put(listDataHeader.get(0),acute);
         listHash.put(listDataHeader.get(1),subacute);
