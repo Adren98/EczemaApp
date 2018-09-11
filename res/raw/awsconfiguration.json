@@ -1,0 +1,20 @@
+{
+    "Version": "1.0",
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "ap-southeast-1:b294bc9e-8671-4ec1-abf4-8e75ae46b5b3",
+                "Region": "ap-southeast-1"
+            }
+        }
+    },
+    "IdentityManager" : {
+      "Default" : { }
+    },
+    "S3TransferUtility": {
+        "Default": {
+            "Bucket": "eczema-demo-app-images",
+            "Region": "ap-southeast-1"
+        }
+    }
+}

@@ -59,7 +59,7 @@ public class ImageUtils {
      *
      * @param bitmap The bitmap to save.
      */
-    public static void saveBitmap(final Bitmap bitmap) {
+    public static void saveBitmap(final Bitmap bitmap, final String fname) {
         final String root =
                 Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow";
         LOGGER.i("Saving %dx%d bitmap to %s.", bitmap.getWidth(), bitmap.getHeight(), root);
@@ -69,7 +69,7 @@ public class ImageUtils {
             LOGGER.i("Make dir failed");
         }
 
-        final String fname = "preview.png";
+//        final String fname = "preview.png";
         final File file = new File(myDir, fname);
         if (file.exists()) {
             file.delete();

@@ -33,6 +33,7 @@ import android.widget.Toast;
 import java.nio.ByteBuffer;
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
+import com.amazonaws.mobile.client.AWSMobileClient;
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
@@ -60,6 +61,8 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     } else {
       requestPermission();
     }
+
+    AWSMobileClient.getInstance().initialize(this).execute();
   }
 
   @Override

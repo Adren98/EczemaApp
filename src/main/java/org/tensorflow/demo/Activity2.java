@@ -41,11 +41,11 @@ public class Activity2 extends AppCompatActivity {
         listDataHeader.add("What is the difference between the 3 different types of eczema?");
         listDataHeader.add("What should I do if I have eczema?");
 
-        List<String> acute = new ArrayList<>();
-        acute.add("This eczema detector classifies 3 different types of eczema: ACUTE, SUBACUTE and CHRONIC eczema.");
+        List<String> types = new ArrayList<>();
+        types.add("This eczema detector classifies 3 different types of eczema: ACUTE, SUBACUTE and CHRONIC eczema.");
 
-        List<String> subacute = new ArrayList<>();
-        subacute.add("\nACUTE\n\n" +
+        List<String> symptoms = new ArrayList<>();
+        symptoms.add("\nACUTE\n\n" +
                 "\"Acute\" refers to an eczema rash that has just started. Some characteristics in the stage of acute eczema include:\n\n" +
                 "- Blisters\n" +
                 "- Extreme redness\n" +
@@ -55,7 +55,7 @@ public class Activity2 extends AppCompatActivity {
                 "- Swelling\n" +
                 "- Heat\n");
 
-        subacute.add("\nSUBACUTE\n\n" +
+        symptoms.add("\nSUBACUTE\n\n" +
                 "The subacute stage is the transitional phase between the acute and chronic stages. Eczema doesn't always spend the same amount of time in the subacute stage." +
                 " Each case of eczema transitions from stage to stage differently. The eczema rash evolves and takes on these new characteristics:\n\n" +
                 "- Flaky, scaly skin\n" +
@@ -63,7 +63,7 @@ public class Activity2 extends AppCompatActivity {
                 "- Cracks in the skin\n" +
                 "- Itching, burning, and/or stinging\n");
 
-        subacute.add("\nCHRONIC\n\n" +
+        symptoms.add("\nCHRONIC\n\n" +
                 "Symptoms are at their most severe during the chronic stage. The chronic stage refers to eczema flares that last three or more months." +
                 " Chronic eczema is quite different from the other two stages in the following ways:\n\n" +
                 "- Thickened, leathery-looking skin or lichenification\n" +
@@ -73,18 +73,18 @@ public class Activity2 extends AppCompatActivity {
                 "- Larger areas of skin breakdown called excoriations\n" +
                 "- Itching\n");
 
-        List<String> chronic = new ArrayList<>();
-        chronic.add("\nACUTE\n\n" +
+        List<String> recommendations = new ArrayList<>();
+        recommendations.add("\nACUTE\n\n" +
                 "- Apply some eczema creams if the symptoms are mild\n" +
                 "- For information: https://www.webmd.com/skin-problems-and-treatments/eczema/treatment-16/treatments-for-you\n");
-        chronic.add("\nSUBACUTE\n\n" +
+        recommendations.add("\nSUBACUTE\n\n" +
                 "- Consult a dermatologist for treatments");
-        chronic.add("\nCHRONIC\n\n" +
+        recommendations.add("\nCHRONIC\n\n" +
                 "- Visit a hospital immediately");
 
-        listHash.put(listDataHeader.get(0),acute);
-        listHash.put(listDataHeader.get(1),subacute);
-        listHash.put(listDataHeader.get(2),chronic);
+        listHash.put(listDataHeader.get(0),types);
+        listHash.put(listDataHeader.get(1),symptoms);
+        listHash.put(listDataHeader.get(2),recommendations);
     }
 
 

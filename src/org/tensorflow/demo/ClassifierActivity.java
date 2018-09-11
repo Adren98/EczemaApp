@@ -290,7 +290,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
     // For examining the actual TF input.
     if (SAVE_PREVIEW_BITMAP) {
-      ImageUtils.saveBitmap(croppedBitmap);
+      ImageUtils.saveBitmap(croppedBitmap, "preview.png");
     }
 
     runInBackground(
