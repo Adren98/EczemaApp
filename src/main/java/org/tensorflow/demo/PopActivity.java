@@ -75,7 +75,7 @@ public class PopActivity extends Activity {
                 ImageUtils.saveBitmap(bmp, fname);
                 final String root =
                         Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "tensorflow";
-                File upFile = new File(root, fname);
+                final File upFile = new File(root, fname);
 
                 TransferUtility transferUtility =
                         TransferUtility.builder()
@@ -94,6 +94,7 @@ public class PopActivity extends Activity {
                     public void onStateChanged(int id, TransferState state) {
                         if (TransferState.COMPLETED == state) {
                             // Handle a completed upload.
+                            upFile.delete();
                             openCameraConnectionFragment();
                         }
                     }

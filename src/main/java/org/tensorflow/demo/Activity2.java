@@ -81,6 +81,8 @@ public class Activity2 extends AppCompatActivity {
                 "- Consult a dermatologist for treatments");
         recommendations.add("\nCHRONIC\n\n" +
                 "- Visit a hospital immediately");
+        recommendations.add("\nDISCLAIMER:\n\n" +
+                "The application can be used as a reference with provision AS IS. Please see a doctor for more detailed information.");
 
         listHash.put(listDataHeader.get(0),types);
         listHash.put(listDataHeader.get(1),symptoms);
