@@ -59,7 +59,7 @@ public class PopActivity extends Activity {
     }
 
     public void openCameraConnectionFragment() {
-        Intent intent2 = new Intent(PopActivity.this , ClassifierActivity.class);
+        Intent intent2 = new Intent(PopActivity.this, ClassifierActivity.class);
         startActivity(intent2);
     }
 

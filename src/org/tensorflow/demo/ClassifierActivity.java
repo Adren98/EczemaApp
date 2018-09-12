@@ -191,7 +191,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
   public void edit()
   {
-
     Button btn3 = (Button) findViewById(R.id.button3);
     btn3.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -222,7 +221,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 //
 
       ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-      cropCopyBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+      rgbFrameBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
       byte[] byteArray = bStream.toByteArray();
 
       Intent anotherIntent = new Intent(this, PopActivity.class);
